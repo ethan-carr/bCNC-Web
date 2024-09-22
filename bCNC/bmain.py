@@ -195,10 +195,10 @@ class Application(Tk, Sender):
         tkExtra.Balloon.set(self.bufferbar, _("Controller buffer fill"))
 
         # --- Left side ---
-        frame = Frame(self.paned)
+        frame = Frame(self.paned, width=800)
         self.paned.add(frame)  # , minsize=340)
 
-        pageframe = Frame(frame)
+        pageframe = Frame(frame, width=800)
         pageframe.pack(side=TOP, expand=YES, fill=BOTH)
         self.ribbon.setPageFrame(pageframe)
 
@@ -207,7 +207,7 @@ class Application(Tk, Sender):
         f.pack(side=BOTTOM, fill=X)
         self.cmdlabel = Label(f, text=_("Command:"))
         self.cmdlabel.pack(side=LEFT)
-        self.command = Entry(f, relief=SUNKEN, background="White")  # !!!
+        self.command = Entry(f, relief=SUNKEN, background="White", width=60)  # !!!
         self.command.pack(side=RIGHT, fill=X, expand=YES)
         self.command.bind("<Return>", self.cmdExecute)
         self.command.bind("<Up>", self.commandHistoryUp)

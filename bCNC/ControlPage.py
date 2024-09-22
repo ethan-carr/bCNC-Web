@@ -91,9 +91,12 @@ class ConnectionGroup(CNCRibbon.ButtonMenuGroup):
             image=Utils.icons["home32"],
             text=_("Home"),
             compound=TOP,
-            anchor=W,
+            anchor=CENTER,
             command=app.home,
             background=Ribbon._BACKGROUND,
+            width = 80,
+            height = 100,
+            font="Helvetica -24"
         )
         b.grid(row=row, column=col, rowspan=3, padx=0, pady=0, sticky=NSEW)
         tkExtra.Balloon.set(b, _("Perform a homing cycle [$H] now"))
@@ -106,7 +109,7 @@ class ConnectionGroup(CNCRibbon.ButtonMenuGroup):
             image=Utils.icons["unlock"],
             text=_("Unlock"),
             compound=LEFT,
-            anchor=W,
+            anchor=CENTER,
             command=app.unlock,
             background=Ribbon._BACKGROUND,
         )
@@ -120,7 +123,7 @@ class ConnectionGroup(CNCRibbon.ButtonMenuGroup):
             image=Utils.icons["serial"],
             text=_("Connection"),
             compound=LEFT,
-            anchor=W,
+            anchor=CENTER,
             command=lambda s=self: s.event_generate("<<Connect>>"),
             background=Ribbon._BACKGROUND,
         )
@@ -134,7 +137,7 @@ class ConnectionGroup(CNCRibbon.ButtonMenuGroup):
             image=Utils.icons["reset"],
             text=_("Reset"),
             compound=LEFT,
-            anchor=W,
+            anchor=CENTER,
             command=app.softReset,
             background=Ribbon._BACKGROUND,
         )
@@ -150,11 +153,12 @@ class UserGroup(CNCRibbon.ButtonGroup):
     def __init__(self, master, app):
         CNCRibbon.ButtonGroup.__init__(self, master, "User", app)
         self.grid3rows()
-
-        n = Utils.getInt("Buttons", "n", 6)
+        
+        #n = Utils.getInt("Buttons", "n", 6)
+        n = 16
         for i in range(1, n):
             b = Utils.UserButton(
-                self.frame, self.app, i, anchor=W,
+                self.frame, self.app, i, anchor=CENTER, width = 100, height = 40,
                 background=Ribbon._BACKGROUND
             )
             col, row = divmod(i - 1, 3)
@@ -177,6 +181,7 @@ class RunGroup(CNCRibbon.ButtonGroup):
             text=_("Start"),
             compound=TOP,
             background=Ribbon._BACKGROUND,
+            width = 75,
         )
         b.pack(side=LEFT, fill=BOTH)
         tkExtra.Balloon.set(
@@ -191,6 +196,7 @@ class RunGroup(CNCRibbon.ButtonGroup):
             text=_("Pause"),
             compound=TOP,
             background=Ribbon._BACKGROUND,
+            width = 75,
         )
         b.pack(side=LEFT, fill=BOTH)
         tkExtra.Balloon.set(
@@ -207,6 +213,8 @@ class RunGroup(CNCRibbon.ButtonGroup):
             text=_("Stop"),
             compound=TOP,
             background=Ribbon._BACKGROUND,
+            width = 75,
+            font = ("Helvetica", 24, "bold")
         )
         b.pack(side=LEFT, fill=BOTH)
         tkExtra.Balloon.set(
@@ -347,8 +355,7 @@ class DROFrame(CNCRibbon.PageFrame):
             text=_("X=0"),
             command=self.setX0,
             activebackground="LightYellow",
-            padx=2,
-            pady=1,
+            height=3,
         )
         self.xzero.grid(row=row, column=col, pady=0, sticky=EW)
         tkExtra.Balloon.set(
@@ -364,7 +371,8 @@ class DROFrame(CNCRibbon.PageFrame):
             command=self.setY0,
             activebackground="LightYellow",
             padx=2,
-            pady=1,
+            pady=2,
+            height=3,
         )
         self.yzero.grid(row=row, column=col, pady=0, sticky=EW)
         tkExtra.Balloon.set(
@@ -380,7 +388,8 @@ class DROFrame(CNCRibbon.PageFrame):
             command=self.setZ0,
             activebackground="LightYellow",
             padx=2,
-            pady=1,
+            pady=2,
+            height=3,
         )
         self.zzero.grid(row=row, column=col, pady=0, sticky=EW)
         tkExtra.Balloon.set(
@@ -398,7 +407,8 @@ class DROFrame(CNCRibbon.PageFrame):
             command=self.setXY0,
             activebackground="LightYellow",
             padx=2,
-            pady=1,
+            pady=2,
+            height=3,
         )
         self.xyzero.grid(row=row, column=col, pady=0, sticky=EW)
         tkExtra.Balloon.set(
@@ -414,7 +424,8 @@ class DROFrame(CNCRibbon.PageFrame):
             command=self.setXYZ0,
             activebackground="LightYellow",
             padx=2,
-            pady=1,
+            pady=2,
+            height=3,
         )
         self.xyzzero.grid(row=row, column=col, pady=0, sticky=EW, columnspan=2)
         tkExtra.Balloon.set(
@@ -437,7 +448,7 @@ class DROFrame(CNCRibbon.PageFrame):
             activebackground="LightYellow",
             command=lambda s=self: s.event_generate("<<SetWPOS>>"),
             padx=2,
-            pady=1,
+            pady=2,
         )
         b.pack(side=LEFT, fill=X, expand=YES)
         tkExtra.Balloon.set(b, _("Set WPOS to mouse location"))
@@ -451,7 +462,7 @@ class DROFrame(CNCRibbon.PageFrame):
             activebackground="LightYellow",
             command=lambda s=self: s.event_generate("<<MoveGantry>>"),
             padx=2,
-            pady=1,
+            pady=2,
         )
         b.pack(side=RIGHT, fill=X, expand=YES)
         tkExtra.Balloon.set(b, _("Move gantry to mouse location [g]"))
@@ -923,8 +934,8 @@ class ControlFrame(CNCRibbon.PageExLabelFrame):
         row += 1
         col = 0
 
-        width = 3
-        height = 2
+        width = 10
+        height = 4  
 
         b = Button(
             frame,
@@ -932,7 +943,8 @@ class ControlFrame(CNCRibbon.PageExLabelFrame):
             command=self.moveZup,
             width=width,
             height=height,
-            activebackground="LightYellow",
+            activebackground="LightYellow",\
+            padx=10
         )
         b.grid(row=row, column=col, sticky=EW)
         tkExtra.Balloon.set(b, _("Move +Z"))
@@ -1394,7 +1406,7 @@ class abcControlFrame(CNCRibbon.PageExLabelFrame):
         col = 0
 
         width = 3
-        height = 2
+        height = 5
 
         b = Button(
             frame,
@@ -2052,7 +2064,7 @@ class StateFrame(CNCRibbon.PageExLabelFrame):
         self.overrideCombo.grid(row=row, column=col, pady=0, sticky=EW)
         tkExtra.Balloon.set(self.overrideCombo, _("Select override type."))
 
-        b = Button(f, text=_("Reset"), pady=0, command=self.resetOverride)
+        b = Button(f, text=_("Reset"), pady=0, height=2, command=self.resetOverride)
         b.grid(row=row + 1, column=col, pady=0, sticky=NSEW)
         tkExtra.Balloon.set(b, _("Reset override to 100%"))
 
@@ -2066,6 +2078,7 @@ class StateFrame(CNCRibbon.PageExLabelFrame):
             from_=25,
             to_=200,
             resolution=1,
+            width = 30,
         )
         self.overrideScale.bind("<Double-1>", self.resetOverride)
         self.overrideScale.bind("<Button-3>", self.resetOverride)

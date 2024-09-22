@@ -551,6 +551,10 @@ class TabRibbonFrame(Frame):
             "<<New>>",
             image=Utils.icons["new"],
             background=_BACKGROUND_DISABLE,
+            width=50, 
+            height=50,
+
+            
         )
         tkExtra.Balloon.set(b, _("New file"))
         b.pack(side=LEFT)
@@ -561,6 +565,8 @@ class TabRibbonFrame(Frame):
             "<<Open>>",
             image=Utils.icons["load"],
             background=_BACKGROUND_DISABLE,
+            width=50, 
+            height=50,
         )
         tkExtra.Balloon.set(b, _("Open file [Ctrl-O]"))
         b.pack(side=LEFT)
@@ -571,6 +577,8 @@ class TabRibbonFrame(Frame):
             "<<Save>>",
             image=Utils.icons["save"],
             background=_BACKGROUND_DISABLE,
+            width=50, 
+            height=50,
         )
         tkExtra.Balloon.set(b, _("Save all [Ctrl-S]"))
         b.pack(side=LEFT)
@@ -581,6 +589,8 @@ class TabRibbonFrame(Frame):
             "<<Undo>>",
             image=Utils.icons["undo"],
             background=_BACKGROUND_DISABLE,
+            width=50, 
+            height=50,
         )
         tkExtra.Balloon.set(b, _("Undo [Ctrl-Z]"))
         b.pack(side=LEFT)
@@ -628,7 +638,7 @@ class TabRibbonFrame(Frame):
         )
 
         # --- TabBar ---
-        self._tabFrame = Frame(frame, background=_BACKGROUND_DISABLE)
+        self._tabFrame = Frame(frame, background=_BACKGROUND_DISABLE,pady=10)
         self._tabFrame.pack(side=LEFT, fill=BOTH, expand=YES)
 
         # ==== Ribbon Frame ====
