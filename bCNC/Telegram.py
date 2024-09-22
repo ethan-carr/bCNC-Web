@@ -2,7 +2,7 @@
 import requests
 
 # Replace with your bot's token and chat ID
-BOT_TOKEN = '8104556284:AAEgpKPMxaCGeJUrqrLe4h5roUvyTR5V-Lc'
+BOT_TOKEN = ""
 CHAT_ID = '6449739887'  # You can find your chat ID by messaging your bot and checking the message updates
 
 def send_telegram_message(message):
