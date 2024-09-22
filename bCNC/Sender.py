@@ -23,6 +23,7 @@ import Pendant
 import rexx
 import Utils
 from CNC import CNC, MSG, UPDATE, WAIT, GCode
+import Telegram
 
 __author__ = "Vasilis Vlachoudis"
 __email__ = "vvlachoudis@gmail.com"
@@ -658,6 +659,7 @@ class Sender:
     # Called when run is finished
     # ----------------------------------------------------------------------
     def runEnded(self):
+        # TODO: Add a notification or something for this. 
         if self.running:
             self.log.put((Sender.MSG_RUNEND, _("Run ended")))
             self.log.put((Sender.MSG_RUNEND, str(datetime.now())))
@@ -673,6 +675,7 @@ class Sender:
         self._pause = False
         self.running = False
         CNC.vars["running"] = False
+        Telegram.send_telegram_message("The application has finished running successfully.")
 
     # ----------------------------------------------------------------------
     # Stop the current run
